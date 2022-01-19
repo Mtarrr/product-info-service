@@ -1,9 +1,12 @@
-package com.github.mtarrr.pis.models;
+package com.github.mtarrr.pis.model;
+
+import lombok.Data;
 
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
+@Data
 public class ProductOffering { /*Product Offering represents entity that are orderable from the provider of the catalog,
                                                                            this resource includes pricing information.*/
 
@@ -27,7 +30,7 @@ public class ProductOffering { /*Product Offering represents entity that are ord
 
     private List<CustomerCategoryRef> customerCategory; //List of applicable customer categories
 
-    private long version; //Version of the entity
+    private Long version; //Version of the entity
 
 
 

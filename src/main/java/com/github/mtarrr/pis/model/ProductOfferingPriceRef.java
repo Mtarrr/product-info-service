@@ -1,5 +1,9 @@
-package com.github.mtarrr.pis.models;
+package com.github.mtarrr.pis.model;
 
+
+import lombok.Data;
+
+@Data
 public class ProductOfferingPriceRef { //The entity represents reference to the ProductOfferingPrice.
 
     private String id; //Unique identifier
