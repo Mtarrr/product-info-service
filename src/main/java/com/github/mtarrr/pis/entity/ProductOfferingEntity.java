@@ -3,7 +3,10 @@ package com.github.mtarrr.pis.entity;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.OffsetDateTime;
 
 @Data
@@ -22,7 +25,7 @@ public class ProductOfferingEntity {
     private Long version;
 
     @Column(name = "body")
-    @Type(type = "com.github.mtarrr.pis.entity.ProductOfferingBody")
+    @Type(type = "java.lang.String")
     private ProductOfferingBody body;
 
 

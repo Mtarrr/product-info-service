@@ -14,6 +14,14 @@
         <version>2.6.1</version>
     </parent>
 
+    <properties>
+        <jooq.version>3.14.0</jooq.version>
+        <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <lombok.version>1.18.2</lombok.version>
+        <maven.compiler.source>14</maven.compiler.source>
+        <maven.compiler.target>14</maven.compiler.target>
+    </properties>
+
     <dependencies>
 
         <!-- Spring Starters -->
@@ -42,6 +50,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
@@ -58,7 +67,13 @@
         <dependency>
             <groupId>org.jooq</groupId>
             <artifactId>jooq-meta-extensions-hibernate</artifactId>
-            <version>3.16.2</version>
+            <version>${jooq.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
         </dependency>
 
 
@@ -66,25 +81,20 @@
 
 
     <build>
-
         <plugins>
-            <!--    JOOQ   -->
             <plugin>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-codegen-maven</artifactId>
-                <version>3.16.2</version>
+                <version>${jooq.version}</version>
 
-                <!-- The plugin should hook into the generate goal -->
                 <executions>
                     <execution>
-                        <phase>generate-sources</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                     </execution>
                 </executions>
 
-                <!-- Manage the plugin's dependency. In this example, we'll use a PostgreSQL database-->
                 <dependencies>
                     <dependency>
                         <groupId>org.postgresql</groupId>
@@ -94,17 +104,28 @@
                 </dependencies>
 
                 <configuration>
-                    <!-- JDBC connection parameters-->
-                    <jdbc>
+                    <!--<jdbc>
                         <driver>org.postgresql.Driver</driver>
                         <url>jdbc:postgresql://localhost:5432/postgres</url>
                         <user>postgres</user>
                         <password>postgres</password>
-                    </jdbc>
-                    <!-- Generator parameters -->
+                    </jdbc>-->
+
                     <generator>
+                        <strategy>
+                            <matchers>
+                                <tables>
+                                    <table>
+                                        <tableClass>
+                                            <transform>PASCAL</transform>
+                                            <expression>$0_Table</expression>
+                                        </tableClass>
+                                    </table>
+                                </tables>
+                            </matchers>
+                        </strategy>
                         <database>
-                            <!--    New -->
+                            <!--jakarta.persistence.PersistenceException error-->
                             <name>org.jooq.meta.extensions.jpa.JPADatabase</name>
                             <properties>
                                 <property>
@@ -114,7 +135,7 @@
 
                                 <property>
                                     <key>packages</key>
-                                    <value>com.example.entity</value>
+                                    <value>com.github.mtarrr.pis.entity</value>
                                 </property>
 
                                 <property>
@@ -123,14 +144,14 @@
                                 </property>
                             </properties>
 
-
                             <includes>.*</includes>
                             <inputSchema>public</inputSchema>
                             <forcedTypes>
                                 <forcedType>
                                     <!--JSONB (body)-->
                                     <userType>com.github.mtarrr.pis.entity.ProductOfferingBody</userType>
-                                    <binding>com.github.mtarrr.pis.entity.binding.JSONBProductOfferingBodyBinding</binding>
+                                    <binding>com.github.mtarrr.pis.entity.binding.JSONBProductOfferingBodyBinding
+                                    </binding>
                                     <includeExpression>body</includeExpression>
                                     <!--timestamptz (last_update)-->
                                     <name>TIMESTAMPWITHTIMEZONE</name>
@@ -140,24 +161,40 @@
 
                         </database>
                         <generate>
-                            <jooqVersionReference>3.16.2</jooqVersionReference>
+                            <!--<jooqVersionReference>${jooq.version}</jooqVersionReference>-->
+                            <javaTimeTypes>true</javaTimeTypes>
+                            <springAnnotations>true</springAnnotations>
+                            <fluentSetters>true</fluentSetters>
                             <records>true</records>
                         </generate>
                         <target>
-                            <packageName>org.jooq.codegen.maven.example</packageName>
+                            <packageName>com.github.mtarrr.pis.db.jooq</packageName>
                             <directory>target/generated-sources/jooq</directory>
                         </target>
                     </generator>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
         </plugins>
-
     </build>
-
-
-    <properties>
-        <maven.compiler.source>14</maven.compiler.source>
-        <maven.compiler.target>14</maven.compiler.target>
-    </properties>
-
 </project>

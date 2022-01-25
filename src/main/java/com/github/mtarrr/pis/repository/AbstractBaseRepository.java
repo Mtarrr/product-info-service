@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public abstract class AbstractBaseRepository<K, E> implements BaseRepository<K,E> {
+public abstract class AbstractBaseRepository<K, E> implements BaseRepository<K, E> {
 
     protected DSLContext dsl;
 

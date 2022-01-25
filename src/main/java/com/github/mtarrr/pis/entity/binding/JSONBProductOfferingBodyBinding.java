@@ -6,10 +6,10 @@ import org.jooq.*;
 
 import java.sql.SQLException;
 
-public class JSONBProductOfferingBodyBinding implements Binding<JSONB, ProductOfferingBody> {
+public class JSONBProductOfferingBodyBinding implements Binding<String, ProductOfferingBody> {
     @Override
-    public @NotNull Converter<JSONB, ProductOfferingBody> converter() {
-        return null;
+    public @NotNull Converter<String, ProductOfferingBody> converter() {
+        return new JSONBProductOfferingBodyConverter();
     }
 
     @Override

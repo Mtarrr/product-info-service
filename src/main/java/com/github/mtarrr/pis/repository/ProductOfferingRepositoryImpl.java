@@ -4,7 +4,6 @@ import com.github.mtarrr.pis.entity.ProductOfferingEntity;
 import org.jooq.OrderField;
 import org.jooq.Record;
 import org.jooq.Table;
-import org.jooq.codegen.maven.example.Tables;
 
 import java.sql.SQLException;
 
@@ -14,12 +13,14 @@ public class ProductOfferingRepositoryImpl extends AbstractBaseRepository<String
 
     @Override
     public Table<?> getTable() {
-        return Tables.PRODUCT_OFFERING;
+        /*return Tables.PRODUCT_OFFERING;*/
+        return null;
     }
 
     @Override
     public OrderField<?> getDefaultOrderBy() {
-        return Tables.PRODUCT_OFFERING.LAST_UPDATE;
+        /*return Tables.PRODUCT_OFFERING.LAST_UPDATE;*/
+        return null;
     }
 
     @Override

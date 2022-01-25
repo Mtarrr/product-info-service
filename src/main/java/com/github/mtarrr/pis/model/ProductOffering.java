@@ -33,5 +33,4 @@ public class ProductOffering { /*Product Offering represents entity that are ord
     private Long version; //Version of the entity
 
 
-
 }
