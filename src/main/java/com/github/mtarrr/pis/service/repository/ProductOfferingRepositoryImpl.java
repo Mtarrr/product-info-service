@@ -1,6 +1,6 @@
-package com.github.mtarrr.pis.repository;
+package com.github.mtarrr.pis.service.repository;
 
-import com.github.mtarrr.pis.entity.ProductOfferingEntity;
+import com.github.mtarrr.pis.model.entity.ProductOfferingEntity;
 import org.jooq.OrderField;
 import org.jooq.Record;
 import org.jooq.Table;

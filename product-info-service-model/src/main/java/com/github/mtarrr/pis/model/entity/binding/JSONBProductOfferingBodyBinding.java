@@ -1,6 +1,6 @@
-package com.github.mtarrr.pis.entity.binding;
+package com.github.mtarrr.pis.model.entity.binding;
 
-import com.github.mtarrr.pis.entity.ProductOfferingBody;
+import com.github.mtarrr.pis.model.entity.ProductOfferingBody;
 import org.jetbrains.annotations.NotNull;
 import org.jooq.*;
 

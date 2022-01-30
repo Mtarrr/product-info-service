@@ -1,6 +1,6 @@
 package com.github.mtarrr.pis.service;
 
-import com.github.mtarrr.pis.entity.ProductOfferingEntity;
+import com.github.mtarrr.pis.model.entity.ProductOfferingEntity;
 
 import java.util.List;
 

@@ -1,20 +1,30 @@
 package com.github.mtarrr.pis.configuration;
 
+import org.flywaydb.core.Flyway;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("flyway.properties")
 public class FlyWayConfiguration {
-    /*@Value("${db.url}")
+    //@Value("${db.url}")
     String url;
-    @Value("${db.username}")
+    //@Value("${db.username}")
     String username;
-    @Value("${db.password}")
+    //@Value("${db.password}")
     String password;
-    Flyway flyway = Flyway.configure().dataSource(url,username,password).load();
+    @Value("${pis.migration.clean}")
+    Boolean migrationClean;
 
-    public void migrate(){
+
+    @Bean
+
+    public Flyway flyway() {
+        Flyway flyway = Flyway.configure().dataSource(url, username, password).load();
+        if (migrationClean) {
+            flyway.clean();
+        }
         flyway.migrate();
-    }*/
+        return flyway;
+    }
 }

@@ -1,4 +1,4 @@
-package com.github.mtarrr.pis.entity;
+package com.github.mtarrr.pis.model.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.Type;

@@ -6,7 +6,11 @@
 
     <groupId>groupId</groupId>
     <artifactId>product-info-service</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>product-info-service-model</module>
+    </modules>
 
     <parent>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -75,6 +79,12 @@
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
+        <dependency>
+            <groupId>groupId</groupId>
+            <artifactId>product-info-service-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
 
     </dependencies>
@@ -135,7 +145,7 @@
 
                                 <property>
                                     <key>packages</key>
-                                    <value>com.github.mtarrr.pis.entity</value>
+                                    <value>com.github.mtarrr.pis.model.entity</value>
                                 </property>
 
                                 <property>
@@ -145,14 +155,16 @@
                             </properties>
 
                             <includes>.*</includes>
-                            <inputSchema>public</inputSchema>
+                            <inputSchema>PUBLIC</inputSchema>
                             <forcedTypes>
                                 <forcedType>
                                     <!--JSONB (body)-->
-                                    <userType>com.github.mtarrr.pis.entity.ProductOfferingBody</userType>
-                                    <binding>com.github.mtarrr.pis.entity.binding.JSONBProductOfferingBodyBinding
+                                    <userType>com.github.mtarrr.pis.model.entity.ProductOfferingBody</userType>
+                                    <binding>com.github.mtarrr.pis.model.entity.binding.JSONBProductOfferingBodyBinding
                                     </binding>
                                     <includeExpression>body</includeExpression>
+                                </forcedType>
+                                <forcedType>
                                     <!--timestamptz (last_update)-->
                                     <name>TIMESTAMPWITHTIMEZONE</name>
                                     <types>timestamp.*</types>
@@ -165,7 +177,7 @@
                             <javaTimeTypes>true</javaTimeTypes>
                             <springAnnotations>true</springAnnotations>
                             <fluentSetters>true</fluentSetters>
-                            <records>true</records>
+                            <!--<records>true</records>-->
                         </generate>
                         <target>
                             <packageName>com.github.mtarrr.pis.db.jooq</packageName>

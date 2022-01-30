@@ -1,4 +1,4 @@
-package com.github.mtarrr.pis.repository;
+package com.github.mtarrr.pis.service.repository;
 
 import org.jooq.DSLContext;
 import org.jooq.OrderField;
