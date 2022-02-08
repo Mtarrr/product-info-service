@@ -1,27 +1,43 @@
 package com.github.mtarrr.pis.model.entity.binding;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mtarrr.pis.model.entity.ProductOfferingBody;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import org.jooq.Converter;
 
+@RequiredArgsConstructor
 public class JSONBProductOfferingBodyConverter implements Converter<String, ProductOfferingBody> {
-    @Override
-    public ProductOfferingBody from(String databaseObject) {
-        return null;
-    }
+
+    private final ObjectMapper mapper;
 
     @Override
+    @SneakyThrows
+    public ProductOfferingBody from(String databaseObject) {
+        if (databaseObject == null){
+            return null;
+        }
+        return mapper.readValue(databaseObject, ProductOfferingBody.class);
+    }
+
+
+    @Override
+    @SneakyThrows
     public String to(ProductOfferingBody userObject) {
-        return null;
+        if (userObject == null){
+            return null;
+        }
+        return mapper.writeValueAsString(userObject);
     }
 
     @Override
     public @NotNull Class<String> fromType() {
-        return null;
+        return String.class;
     }
 
     @Override
     public @NotNull Class<ProductOfferingBody> toType() {
-        return null;
+        return ProductOfferingBody.class;
     }
 }

@@ -4,12 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>groupId</groupId>
     <artifactId>product-info-service</artifactId>
+    <groupId>com.github.mtarrr.pis</groupId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>product-info-service-model</module>
+        <module>product-info-service-application</module>
+        <module>product-info-service-controller</module>
+        <module>product-info-service-impl</module>
+        <module>product-info-service-database</module>
     </modules>
 
     <parent>
@@ -22,6 +26,9 @@
         <jooq.version>3.14.0</jooq.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <lombok.version>1.18.2</lombok.version>
+        <maven.compiler.source>14</maven.compiler.source>
+        <maven.compiler.target>14</maven.compiler.target>
+        <elasticsearch.version>7.17.0</elasticsearch.version>
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
     </properties>
@@ -79,11 +86,11 @@
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
+
         <dependency>
-            <groupId>groupId</groupId>
-            <artifactId>product-info-service-model</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <version>${elasticsearch.version}</version>
         </dependency>
 
 
@@ -99,6 +106,7 @@
 
                 <executions>
                     <execution>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
@@ -114,13 +122,6 @@
                 </dependencies>
 
                 <configuration>
-                    <!--<jdbc>
-                        <driver>org.postgresql.Driver</driver>
-                        <url>jdbc:postgresql://localhost:5432/postgres</url>
-                        <user>postgres</user>
-                        <password>postgres</password>
-                    </jdbc>-->
-
                     <generator>
                         <strategy>
                             <matchers>
@@ -135,7 +136,7 @@
                             </matchers>
                         </strategy>
                         <database>
-                            <!--jakarta.persistence.PersistenceException error-->
+
                             <name>org.jooq.meta.extensions.jpa.JPADatabase</name>
                             <properties>
                                 <property>
@@ -158,14 +159,12 @@
                             <inputSchema>PUBLIC</inputSchema>
                             <forcedTypes>
                                 <forcedType>
-                                    <!--JSONB (body)-->
                                     <userType>com.github.mtarrr.pis.model.entity.ProductOfferingBody</userType>
                                     <binding>com.github.mtarrr.pis.model.entity.binding.JSONBProductOfferingBodyBinding
                                     </binding>
                                     <includeExpression>body</includeExpression>
                                 </forcedType>
                                 <forcedType>
-                                    <!--timestamptz (last_update)-->
                                     <name>TIMESTAMPWITHTIMEZONE</name>
                                     <types>timestamp.*</types>
                                 </forcedType>
@@ -173,11 +172,10 @@
 
                         </database>
                         <generate>
-                            <!--<jooqVersionReference>${jooq.version}</jooqVersionReference>-->
                             <javaTimeTypes>true</javaTimeTypes>
                             <springAnnotations>true</springAnnotations>
                             <fluentSetters>true</fluentSetters>
-                            <!--<records>true</records>-->
+                            <records>true</records>
                         </generate>
                         <target>
                             <packageName>com.github.mtarrr.pis.db.jooq</packageName>
