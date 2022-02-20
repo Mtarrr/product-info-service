@@ -1,14 +1,18 @@
 package com.github.mtarrr.pis.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Data
-public class ProductOffering { /*Product Offering represents entity that are orderable from the provider of the catalog,
-                                                                           this resource includes pricing information.*/
+public class ProductOffering implements HasNullFields { /*Product Offering represents entity that are orderable from the provider of the catalog,this resource includes pricing information.*/
+
+    @JsonIgnore
+    private List<String> nullFields = new ArrayList<>();
 
     private String id; //Unique identifier of the entity
 
@@ -33,4 +37,17 @@ public class ProductOffering { /*Product Offering represents entity that are ord
     private Long version; //Version of the entity
 
 
+    public void setName(String name) {
+        this.name = name;
+        if (name == null) {
+            nullFields.add("name");
+        }
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+        if (description == null) {
+            nullFields.add("description");
+        }
+    }
 }

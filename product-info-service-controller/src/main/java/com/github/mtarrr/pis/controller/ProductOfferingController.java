@@ -1,4 +1,4 @@
-package com.github.mtarrr.pis.controller.productManagement.productOffering;
+package com.github.mtarrr.pis.controller;
 
 import com.github.mtarrr.pis.mapper.ProductOfferingMapper;
 import com.github.mtarrr.pis.model.ProductOffering;

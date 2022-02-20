@@ -1,18 +1,23 @@
 package com.github.mtarrr.pis.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.mtarrr.pis.model.HasNullFields;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "product_offering")
-public class ProductOfferingEntity {
+public class ProductOfferingEntity implements HasNullFields {
+
+    @JsonIgnore
+    @Transient
+    private List<String> nullFields = new ArrayList<>();
 
     @Id
     @Column(name = "id")
@@ -27,6 +32,5 @@ public class ProductOfferingEntity {
     @Column(name = "body")
     @Type(type = "java.lang.String")
     private ProductOfferingBody body;
-
 
 }
