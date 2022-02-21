@@ -14,12 +14,12 @@
     <dependencies>
         <dependency>
             <groupId>com.github.mtarrr.pis</groupId>
-            <artifactId>product-info-service-database</artifactId>
+            <artifactId>product-info-service-controller</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.mtarrr.pis</groupId>
-            <artifactId>product-info-service-controller</artifactId>
+            <artifactId>product-info-service-database</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

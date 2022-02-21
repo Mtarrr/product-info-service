@@ -8,7 +8,7 @@ import org.jooq.Table;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ProductOfferingRepositoryImpl extends AbstractBaseRepository<String, ProductOfferingEntity> {
+public class ProductOfferingRepositoryImpl extends AbstractBaseRepository<String, ProductOfferingEntity> implements ProductOfferingRepository {
 
     @Override
     public Table<?> getTable() {
