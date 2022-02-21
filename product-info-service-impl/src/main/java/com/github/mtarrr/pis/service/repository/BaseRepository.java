@@ -9,7 +9,7 @@ public interface BaseRepository<K, E> {
 
     List<E> getAll();
 
-    E update(K id,E entity);
+    E update(K id, E entity);
 
     void delete(K id);
 }

@@ -5,22 +5,22 @@
     <parent>
         <artifactId>product-info-service</artifactId>
         <groupId>com.github.mtarrr.pis</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>product-info-service-controller</artifactId>
     <dependencies>
         <dependency>
-            <groupId>groupId</groupId>
+            <groupId>com.github.mtarrr.pis</groupId>
             <artifactId>product-info-service-impl</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>groupId</groupId>
+            <groupId>com.github.mtarrr.pis</groupId>
             <artifactId>product-info-service-model</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
-
 </project>

@@ -15,7 +15,7 @@ public class JSONBProductOfferingBodyConverter implements Converter<String, Prod
     @Override
     @SneakyThrows
     public ProductOfferingBody from(String databaseObject) {
-        if (databaseObject == null){
+        if (databaseObject == null) {
             return null;
         }
         return mapper.readValue(databaseObject, ProductOfferingBody.class);
@@ -25,7 +25,7 @@ public class JSONBProductOfferingBodyConverter implements Converter<String, Prod
     @Override
     @SneakyThrows
     public String to(ProductOfferingBody userObject) {
-        if (userObject == null){
+        if (userObject == null) {
             return null;
         }
         return mapper.writeValueAsString(userObject);

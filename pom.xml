@@ -7,7 +7,7 @@
     <artifactId>product-info-service</artifactId>
     <groupId>com.github.mtarrr.pis</groupId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
     <modules>
         <module>product-info-service-model</module>
         <module>product-info-service-application</module>
@@ -23,14 +23,13 @@
     </parent>
 
     <properties>
+        <revision>1.0-SNAPSHOT</revision>
         <jooq.version>3.14.0</jooq.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <lombok.version>1.18.2</lombok.version>
-        <maven.compiler.source>14</maven.compiler.source>
-        <maven.compiler.target>14</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <elasticsearch.version>7.17.0</elasticsearch.version>
-        <maven.compiler.source>14</maven.compiler.source>
-        <maven.compiler.target>14</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -68,6 +67,7 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
@@ -97,8 +97,6 @@
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
             <version>${elasticsearch.version}</version>
         </dependency>
-
-
     </dependencies>
 
 

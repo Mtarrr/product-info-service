@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class FlyWayConfiguration{
+public class FlyWayConfiguration {
     @Value("${db.username}")
     String username;
 
