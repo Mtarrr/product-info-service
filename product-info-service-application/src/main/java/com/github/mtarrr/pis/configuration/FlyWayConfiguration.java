@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class FlyWayConfiguration {
-    @Value("${db.username}")
-    String username;
+    @Value("${spring.datasource.username}")
+    String userName;
 
-    @Value("${db.password}")
+    @Value("${spring.datasource.password}")
     String password;
 
-    @Value("${db.url}")
+    @Value("${spring.datasource.url}")
     String url;
 
     @Value("${pis.migration.clean}")
@@ -26,7 +26,7 @@ public class FlyWayConfiguration {
                 .baselineOnMigrate(true)
                 .cleanOnValidationError(true)
                 .locations("classpath:db/migration")
-                .dataSource(url, username, password)
+                .dataSource(url, userName, password)
                 .load();
         if (migrationClean) {
             flyway.clean();

@@ -2,17 +2,15 @@ package com.github.mtarrr.pis.service.repository;
 
 import org.jooq.Record;
 import org.jooq.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 public abstract class AbstractBaseRepository<K extends Serializable, E> implements BaseRepository<K, E> {
 
+    @Autowired
     protected DSLContext dsl;
-
-    protected AbstractBaseRepository() {
-    }
 
     public abstract Table<?> getTable();
 
@@ -29,21 +27,27 @@ public abstract class AbstractBaseRepository<K extends Serializable, E> implemen
     protected Record createRecordFromEntity(E entity) {
         UpdatableRecord<?> newRecord = dsl.<UpdatableRecord<?>>newRecord((Table) getTable());
         newRecord.from(entity);
+
         return newRecord;
     }
 
     public E insert(E entity) {
-        return Objects.requireNonNull(dsl.insertInto(getTable())
-                        .set(createRecordFromEntity(entity))
-                        .returning()
-                        .fetchOne())
+        Record newRecord = createRecordFromEntity(entity);
+        processBeforeInsert(newRecord);
+
+        return dsl.insertInto(getTable())
+                .set(createRecordFromEntity(entity))
+                .set(newRecord)
+                .returning()
+                .fetchOne()
                 .into(getEntityClass());
+
     }
 
     public E get(K id) {
-        return Objects.requireNonNull(dsl.selectFrom(getTable())
-                        .where(isIdEqual(id))
-                        .fetchOne())
+        return dsl.selectFrom(getTable())
+                .where(isIdEqual(id))
+                .fetchOne()
                 .into(getEntityClass());
     }
 
@@ -55,16 +59,24 @@ public abstract class AbstractBaseRepository<K extends Serializable, E> implemen
     }
 
     public E update(K id, E entity) {
+        Record updatedRecord = createRecordFromEntity(entity);
+        processBeforeUpdate(id, updatedRecord);
+
         return dsl.update(getTable())
-                .set(createRecordFromEntity(entity))
+                .set(updatedRecord)
                 .where(isIdEqual(id))
                 .returning()
                 .fetchOne()
                 .into(getEntityClass());
+
     }
 
     public void delete(K id) {
         dsl.delete(getTable())
                 .where(isIdEqual(id));
     }
+
+    protected abstract void processBeforeInsert(Record newRecord);
+
+    protected abstract void processBeforeUpdate(K id, Record updatedRecord);
 }

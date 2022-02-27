@@ -1,9 +1,11 @@
 pis:
   migration:
-    clean: true
-db:
-  password: postgres
-  username: postgres
-  url: jdbc:postgresql://localhost:5432/postgres
-server:
-  contextPath=/<whatever>
+    clean: false
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+logging:
+  level:
+    root: DEBUG

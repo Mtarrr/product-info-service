@@ -34,11 +34,6 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
         <!-- Spring Starters -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -54,7 +49,6 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <!--    Flyway   -->
         <dependency>
@@ -74,6 +68,7 @@
             <version>22.0.0</version>
             <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>javax.persistence-api</artifactId>
@@ -92,11 +87,6 @@
             <version>${mapstruct.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-high-level-client</artifactId>
-            <version>${elasticsearch.version}</version>
-        </dependency>
     </dependencies>
 
 
@@ -116,13 +106,13 @@
                     </execution>
                 </executions>
 
-                <dependencies>
+                <!--<dependencies>
                     <dependency>
                         <groupId>org.postgresql</groupId>
                         <artifactId>postgresql</artifactId>
                         <version>9.4.1212</version>
                     </dependency>
-                </dependencies>
+                </dependencies>-->
 
                 <configuration>
                     <generator>
@@ -157,7 +147,6 @@
                                     <value>true</value>
                                 </property>
                             </properties>
-
                             <includes>.*</includes>
                             <inputSchema>PUBLIC</inputSchema>
                             <forcedTypes>

@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper()
+@Mapper
 public interface ProductOfferingMapper {
 
     ProductOfferingMapper INSTANCE = Mappers.getMapper(ProductOfferingMapper.class);
