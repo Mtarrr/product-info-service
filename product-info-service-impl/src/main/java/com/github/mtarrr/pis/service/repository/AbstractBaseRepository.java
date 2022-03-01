@@ -73,7 +73,7 @@ public abstract class AbstractBaseRepository<K extends Serializable, E> implemen
 
     public void delete(K id) {
         dsl.delete(getTable())
-                .where(isIdEqual(id));
+                .where(isIdEqual(id)).returning().fetchOne().into(getEntityClass());
     }
 
     protected abstract void processBeforeInsert(Record newRecord);

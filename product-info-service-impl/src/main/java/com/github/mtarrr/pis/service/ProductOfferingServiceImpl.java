@@ -20,12 +20,7 @@ public class ProductOfferingServiceImpl implements ProductOfferingService {
 
     @Override
     public ProductOfferingEntity patchProductOffering(String id, ProductOfferingEntity productOffering) {
-        ProductOfferingEntity entity = getProductOfferingById(id);
-        entity.setBody(productOffering.getBody());
-        entity.setVersion(productOffering.getVersion());
-        entity.setLastUpdate(productOffering.getLastUpdate());
-        entity.setId(productOffering.getId());
-        return repository.update(productOffering.getId(), productOffering);
+        return repository.update(id, productOffering);
     }
 
     @Override

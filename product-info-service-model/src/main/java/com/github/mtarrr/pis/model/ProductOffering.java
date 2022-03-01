@@ -50,4 +50,46 @@ public class ProductOffering implements HasNullFields { /*Product Offering repre
             nullFields.add("description");
         }
     }
+
+    public void setExtendedParameters(Map<String, Object> extendedParameters) {
+        this.extendedParameters = extendedParameters;
+        if (extendedParameters == null) {
+            nullFields.add("extendedParameters");
+        }
+    }
+
+    public void setHref(String href) {
+        this.href = href;
+        if (href == null) {
+            nullFields.add("href");
+        }
+    }
+
+    public void setProductOfferingPrice(List<ProductOfferingPriceRef> productOfferingPrice) {
+        this.productOfferingPrice = productOfferingPrice;
+        if (productOfferingPrice == null) {
+            nullFields.add("productOfferingPrice");
+        }
+    }
+
+    public void setCategory(List<CategoryRef> category) {
+        this.category = category;
+        if (category == null) {
+            nullFields.add("category");
+        }
+    }
+
+    public void setChannel(List<ChannelRef> channel) {
+        this.channel = channel;
+        if (channel == null) {
+            nullFields.add("channel");
+        }
+    }
+
+    public void setCustomerCategory(List<CustomerCategoryRef> customerCategory) {
+        this.customerCategory = customerCategory;
+        if (customerCategory == null) {
+            nullFields.add("customerCategory");
+        }
+    }
 }
