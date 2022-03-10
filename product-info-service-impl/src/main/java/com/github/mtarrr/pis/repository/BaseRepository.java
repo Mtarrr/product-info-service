@@ -1,4 +1,4 @@
-package com.github.mtarrr.pis.service.repository;
+package com.github.mtarrr.pis.repository;
 
 import java.util.List;
 

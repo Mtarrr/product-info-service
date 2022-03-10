@@ -1,4 +1,4 @@
-package com.github.mtarrr.pis.service.repository;
+package com.github.mtarrr.pis.repository;
 
 import org.jooq.Record;
 import org.jooq.*;

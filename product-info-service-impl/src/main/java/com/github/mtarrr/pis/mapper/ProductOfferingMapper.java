@@ -35,5 +35,6 @@ public interface ProductOfferingMapper {
     @Mapping(target = "body.category", source = "category")
     @Mapping(target = "body.channel", source = "channel")
     @Mapping(target = "body.customerCategory", source = "customerCategory")
+    @Mapping(target = "body.nullFields", source = "nullFields")
     ProductOfferingEntity map(ProductOffering productOffering);
 }

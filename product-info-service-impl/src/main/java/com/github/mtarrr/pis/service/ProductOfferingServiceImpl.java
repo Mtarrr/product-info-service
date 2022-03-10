@@ -1,7 +1,7 @@
 package com.github.mtarrr.pis.service;
 
 import com.github.mtarrr.pis.model.entity.ProductOfferingEntity;
-import com.github.mtarrr.pis.service.repository.ProductOfferingRepository;
+import com.github.mtarrr.pis.repository.ProductOfferingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +19,11 @@ public class ProductOfferingServiceImpl implements ProductOfferingService {
     }
 
     @Override
-    public ProductOfferingEntity patchProductOffering(String id, ProductOfferingEntity productOffering) {
-        return repository.update(id, productOffering);
+    public ProductOfferingEntity patchProductOffering(String id, ProductOfferingEntity patchProductOffering) {
+        ProductOfferingEntity storedEntity = getProductOfferingById(id);
+        PatchUtils.patchProductOfferingEntity(storedEntity, patchProductOffering);
+
+        return repository.update(id, storedEntity);
     }
 
     @Override
