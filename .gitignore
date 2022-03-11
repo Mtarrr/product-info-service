@@ -1,7 +1,7 @@
+.idea/
+**/*.settings/
 **/target/
 **/*.classpath
 **/*.project
-**/*.settings/
-.idea/
 **/*.iml
 **/.flattened-pom.xml
