@@ -8,8 +8,8 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @SpringBootApplication
 @ServletComponentScan
 @EnableConfigurationProperties
-public class ProductInfoServerApplication {
+public class ProductInfoServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ProductInfoServerApplication.class, args);
+        SpringApplication.run(ProductInfoServiceApplication.class, args);
     }
 }
