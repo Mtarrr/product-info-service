@@ -15,17 +15,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-import static javax.xml.crypto.dsig.SignatureProperties.TYPE;
-import static org.elasticsearch.action.update.UpdateHelper.ContextFields.INDEX;
-
 @Service
 public class ElasticService {
-
+    @Autowired
     private RestHighLevelClient client;
 
     private ObjectMapper objectMapper;
 
     private final ProductOfferingMapper productOfferingMapper = ProductOfferingMapper.INSTANCE;
+
+    private static final String INDEX_NAME = "product";
+    private static final String INDEX_TYPE = "doc";
 
     @Autowired
     public ElasticService(RestHighLevelClient client, ObjectMapper objectMapper) {
@@ -38,7 +38,7 @@ public class ElasticService {
 
         Map<String, Object> mapper = objectMapper.convertValue(productOffering, Map.class);
 
-        IndexRequest indexRequest = new IndexRequest(INDEX, TYPE, entity.getId())
+        IndexRequest indexRequest = new IndexRequest(INDEX_NAME, INDEX_TYPE, entity.getId())
                 .source(mapper);
 
         IndexResponse indexResponse = client.index(indexRequest, RequestOptions.DEFAULT);
@@ -47,7 +47,7 @@ public class ElasticService {
 
     public void deleteById(String id) throws Exception {
 
-        DeleteRequest deleteRequest = new DeleteRequest(INDEX, TYPE, id);
+        DeleteRequest deleteRequest = new DeleteRequest(INDEX_NAME, INDEX_TYPE, id);
         DeleteResponse response =
                 client.delete(deleteRequest, RequestOptions.DEFAULT);
 

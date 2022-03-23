@@ -3,6 +3,7 @@ package com.github.mtarrr.pis.controller;
 import com.github.mtarrr.pis.mapper.ProductOfferingMapper;
 import com.github.mtarrr.pis.model.ProductOffering;
 import com.github.mtarrr.pis.model.entity.ProductOfferingEntity;
+import com.github.mtarrr.pis.service.ElasticService;
 import com.github.mtarrr.pis.service.ProductOfferingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,18 +19,21 @@ import java.util.stream.Collectors;
 public class ProductOfferingController {
 
     private final ProductOfferingService productOfferingService;
+    private final ElasticService elasticService;
 
     private final ProductOfferingMapper productOfferingMapper = ProductOfferingMapper.INSTANCE;
 
     @PostMapping
     public ResponseEntity<?> createProductOffering(@RequestBody ProductOffering productOffering) throws Exception {
         final ProductOfferingEntity entity = productOfferingService.createProductOffering(productOfferingMapper.map(productOffering));
+        elasticService.saveToElastic(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(productOfferingMapper.map(entity));
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> patchProductOffering(@PathVariable("id") String id, @RequestBody ProductOffering productOffering) throws Exception {
         final ProductOfferingEntity entity = productOfferingService.patchProductOffering(id, productOfferingMapper.map(productOffering));
+        elasticService.saveToElastic(entity);
         return ResponseEntity.status(HttpStatus.OK).body(productOfferingMapper.map(entity));
     }
 
@@ -48,6 +52,7 @@ public class ProductOfferingController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProductOffering(@PathVariable("id") String id) throws Exception {
         productOfferingService.deleteProductOffering(id);
+        elasticService.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

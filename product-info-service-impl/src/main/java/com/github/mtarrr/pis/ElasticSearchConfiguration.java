@@ -10,11 +10,15 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ElasticSearchConfiguration {
-    @Value("${elasticsearch.url}")
+    @Value("${elasticsearch.host}")
     private String host;
+    @Value("${elasticsearch.port}")
+    private int port;
+    @Value("${elasticsearch.protocol}")
+    private String protocol;
 
     @Bean
     public RestHighLevelClient elasticsearchClient() {
-        return new RestHighLevelClient(RestClient.builder(new HttpHost(host)));
+        return new RestHighLevelClient(RestClient.builder(new HttpHost(host, port)));
     }
 }
