@@ -12,17 +12,22 @@ import java.util.List;
 public class ProductOfferingServiceImpl implements ProductOfferingService {
 
     private final ProductOfferingRepository repository;
+    private final ElasticService elasticService;
 
     @Override
-    public ProductOfferingEntity createProductOffering(ProductOfferingEntity productOffering) {
-        return repository.insert(productOffering);
+    public ProductOfferingEntity createProductOffering(ProductOfferingEntity productOffering) throws Exception {
+        ProductOfferingEntity createdEntity = repository.insert(productOffering);
+        elasticService.saveToElastic(createdEntity);
+        return createdEntity;
     }
 
     @Override
     public ProductOfferingEntity patchProductOffering(String id, ProductOfferingEntity patchProductOffering) throws Exception {
         ProductOfferingEntity storedEntity = getProductOfferingById(id);
         PatchUtils.patchProductOfferingEntity(storedEntity, patchProductOffering);
-        return repository.update(id, storedEntity);
+        ProductOfferingEntity patchedEntity = repository.update(id, storedEntity);
+        elasticService.saveToElastic(patchedEntity);
+        return patchedEntity;
     }
 
     @Override
@@ -36,7 +41,8 @@ public class ProductOfferingServiceImpl implements ProductOfferingService {
     }
 
     @Override
-    public void deleteProductOffering(String id) {
+    public void deleteProductOffering(String id) throws Exception {
         repository.delete(id);
+        elasticService.deleteById(id);
     }
 }

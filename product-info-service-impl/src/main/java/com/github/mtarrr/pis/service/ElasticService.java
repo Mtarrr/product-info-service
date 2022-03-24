@@ -18,9 +18,9 @@ import java.util.Map;
 @Service
 public class ElasticService {
     @Autowired
-    private RestHighLevelClient client;
+    private final RestHighLevelClient client;
 
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     private final ProductOfferingMapper productOfferingMapper = ProductOfferingMapper.INSTANCE;
 
