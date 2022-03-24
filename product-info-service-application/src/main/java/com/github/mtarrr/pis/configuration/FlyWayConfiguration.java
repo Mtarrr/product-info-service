@@ -8,16 +8,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FlyWayConfiguration {
     @Value("${spring.datasource.username}")
-    String userName;
+    private String userName;
 
     @Value("${spring.datasource.password}")
-    String password;
+    private String password;
 
     @Value("${spring.datasource.url}")
-    String url;
+    private String url;
 
     @Value("${pis.migration.clean}")
-    Boolean migrationClean;
+    private Boolean migrationClean;
 
 
     @Bean
