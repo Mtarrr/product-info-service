@@ -1,3 +1,5 @@
+server:
+  port: 8888
 pis:
   migration:
     clean: false
@@ -13,3 +15,6 @@ elasticsearch:
 logging:
   level:
     root: info
+kafka:
+  bootstrapAddress: localhost:9092
+  groupId: "notification"

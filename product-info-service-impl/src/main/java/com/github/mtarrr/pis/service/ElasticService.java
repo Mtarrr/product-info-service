@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mtarrr.pis.mapper.ProductOfferingMapper;
 import com.github.mtarrr.pis.model.ProductOffering;
 import com.github.mtarrr.pis.model.entity.ProductOfferingEntity;
+import lombok.Data;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 @Service
+@Data
 public class ElasticService {
     @Autowired
     private final RestHighLevelClient client;
@@ -26,12 +28,6 @@ public class ElasticService {
 
     private static final String INDEX_NAME = "product";
     private static final String INDEX_TYPE = "doc";
-
-    @Autowired
-    public ElasticService(RestHighLevelClient client, ObjectMapper objectMapper) {
-        this.client = client;
-        this.objectMapper = objectMapper;
-    }
 
     public void saveToElastic(ProductOfferingEntity entity) throws Exception {
         ProductOffering productOffering = productOfferingMapper.map(entity);
