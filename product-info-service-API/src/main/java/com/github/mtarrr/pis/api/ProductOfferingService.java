@@ -1,4 +1,4 @@
-package com.github.mtarrr.pis.service;
+package com.github.mtarrr.pis.api;
 
 import com.github.mtarrr.pis.model.entity.ProductOfferingEntity;
 

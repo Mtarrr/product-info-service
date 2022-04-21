@@ -3,8 +3,8 @@ package com.github.mtarrr.pis.controller;
 import com.github.mtarrr.pis.mapper.ProductOfferingMapper;
 import com.github.mtarrr.pis.model.ProductOffering;
 import com.github.mtarrr.pis.model.entity.ProductOfferingEntity;
-import com.github.mtarrr.pis.service.ElasticService;
-import com.github.mtarrr.pis.service.ProductOfferingService;
+import com.github.mtarrr.pis.service.ElasticServiceImpl;
+import com.github.mtarrr.pis.api.ProductOfferingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class ProductOfferingController {
 
     private final ProductOfferingService productOfferingService;
-    private final ElasticService elasticService;
+    private final ElasticServiceImpl elasticService;
 
     private final ProductOfferingMapper productOfferingMapper = ProductOfferingMapper.INSTANCE;
 

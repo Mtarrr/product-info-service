@@ -1,5 +1,6 @@
-package com.github.mtarrr.pis;
+package com.github.mtarrr.pis.configuration;
 
+import com.github.mtarrr.pis.ExceptionTranslator;
 import org.jooq.SQLDialect;
 import org.jooq.conf.RenderNameStyle;
 import org.jooq.conf.Settings;

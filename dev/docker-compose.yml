@@ -4,14 +4,14 @@ services:
     image: postgres
     container_name: database
     restart: always
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
     volumes:
       - /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.13.4
@@ -26,7 +26,7 @@ services:
         soft: -1
         hard: -1
     ports:
-      - '9200:9200'
+      - "9200:9200"
 
   akhq:
     image: tchiotludo/akhq
@@ -38,17 +38,17 @@ services:
             local:
               properties:
                 bootstrap.servers: "broker:29092"
-    ports:
-      - "8080:8080"
     links:
       - kafka
     depends_on:
       - kafka
+    ports:
+      - "8080:8080"
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.0
-    hostname: zookeeper
     container_name: zookeeper
+    hostname: zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -56,10 +56,6 @@ services:
   kafka:
     image: confluentinc/cp-kafka:7.0.0
     container_name: broker
-    ports:
-      - "9092:9092"
-    depends_on:
-      - zookeeper
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
@@ -68,3 +64,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"

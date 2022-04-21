@@ -1,6 +1,7 @@
 package com.github.mtarrr.pis.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.mtarrr.pis.api.ElasticService;
 import com.github.mtarrr.pis.mapper.ProductOfferingMapper;
 import com.github.mtarrr.pis.model.ProductOffering;
 import com.github.mtarrr.pis.model.entity.ProductOfferingEntity;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 @Service
 @Data
-public class ElasticService {
+public class ElasticServiceImpl implements ElasticService {
     @Autowired
     private final RestHighLevelClient client;
 
@@ -27,7 +28,7 @@ public class ElasticService {
     private final ProductOfferingMapper productOfferingMapper = ProductOfferingMapper.INSTANCE;
 
     private static final String INDEX_NAME = "product";
-    private static final String INDEX_TYPE = "doc";
+    private static final String INDEX_TYPE = "_doc";
 
     public void saveToElastic(ProductOfferingEntity entity) throws Exception {
         ProductOffering productOffering = productOfferingMapper.map(entity);

@@ -1,6 +1,6 @@
 package com.github.mtarrr.pis.service;
 
-import com.github.mtarrr.pis.NotificationService;
+import com.github.mtarrr.pis.api.ProductOfferingService;
 import com.github.mtarrr.pis.model.entity.ProductOfferingEntity;
 import com.github.mtarrr.pis.repository.ProductOfferingRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +13,8 @@ import java.util.List;
 public class ProductOfferingServiceImpl implements ProductOfferingService {
 
     private final ProductOfferingRepository repository;
-    private final ElasticService elasticService;
-    private final NotificationService notificationService;
+    private final ElasticServiceImpl elasticService;
+    private final NotificationServiceImpl notificationService;
 
     @Override
     public ProductOfferingEntity createProductOffering(ProductOfferingEntity productOffering) throws Exception {
