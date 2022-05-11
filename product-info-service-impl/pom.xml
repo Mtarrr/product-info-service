@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>com.github.mtarrr.pis</groupId>
-            <artifactId>product-info-service-API</artifactId>
+            <artifactId>product-info-service-api</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

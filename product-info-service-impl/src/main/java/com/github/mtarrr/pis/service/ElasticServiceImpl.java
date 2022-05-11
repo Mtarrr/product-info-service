@@ -1,7 +1,7 @@
 package com.github.mtarrr.pis.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.mtarrr.pis.api.ElasticService;
+import com.github.mtarrr.pis.api.service.ElasticService;
 import com.github.mtarrr.pis.mapper.ProductOfferingMapper;
 import com.github.mtarrr.pis.model.ProductOffering;
 import com.github.mtarrr.pis.model.entity.ProductOfferingEntity;
@@ -45,6 +45,7 @@ public class ElasticServiceImpl implements ElasticService {
     public void deleteById(String id) throws Exception {
 
         DeleteRequest deleteRequest = new DeleteRequest(INDEX_NAME, INDEX_TYPE, id);
+        //log trace отладочная информация
         DeleteResponse response =
                 client.delete(deleteRequest, RequestOptions.DEFAULT);
 

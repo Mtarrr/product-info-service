@@ -4,7 +4,7 @@ import com.github.mtarrr.pis.mapper.ProductOfferingMapper;
 import com.github.mtarrr.pis.model.ProductOffering;
 import com.github.mtarrr.pis.model.entity.ProductOfferingEntity;
 import com.github.mtarrr.pis.service.ElasticServiceImpl;
-import com.github.mtarrr.pis.api.ProductOfferingService;
+import com.github.mtarrr.pis.api.service.ProductOfferingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

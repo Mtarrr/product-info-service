@@ -1,0 +1,36 @@
+{
+  "id": "08a15fb2-3d53-435f-9c1f-b4782ed4277f",
+  "name": "Harry Potter",
+  "description": "book",
+  "extendedParameters": {
+    "price": "21"
+  },
+  "href": "href",
+  "productOfferingPrice": [
+    {
+      "id": "101",
+      "description": "magic",
+      "price": "201",
+      "priceType": "lowcost"
+    }
+  ],
+  "category": [
+    {
+      "id": "11",
+      "name": "Harry Potter1"
+    }
+  ],
+  "channel": [
+    {
+      "id": "12",
+      "name": "Harry Potter2"
+    }
+  ],
+  "customerCategory": [
+    {
+      "id": "13",
+      "name": "Harry Potter3"
+    }
+  ],
+  "version": 1
+}
