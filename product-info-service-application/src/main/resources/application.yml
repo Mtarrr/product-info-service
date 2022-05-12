@@ -2,7 +2,7 @@ server:
   port: 8888
 pis:
   migration:
-    clean: false
+    clean: true
 spring:
   kafka:
     bootstrap-servers: localhost:9092

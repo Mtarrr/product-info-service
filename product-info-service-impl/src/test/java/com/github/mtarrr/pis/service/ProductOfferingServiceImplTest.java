@@ -7,6 +7,7 @@ import com.github.mtarrr.pis.model.ProductOffering;
 import com.github.mtarrr.pis.model.entity.ProductOfferingBody;
 import com.github.mtarrr.pis.model.entity.ProductOfferingEntity;
 import com.github.mtarrr.pis.repository.ProductOfferingRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,6 +24,7 @@ import java.util.Objects;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 
+@Slf4j
 @ExtendWith(MockitoExtension.class)
 class ProductOfferingServiceImplTest {
 
@@ -46,7 +48,7 @@ class ProductOfferingServiceImplTest {
         try {
             testProduct = mapper.readValue(stream, ProductOffering.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.toString());
         }
     }
     private final ProductOfferingEntity testEntity = productOfferingMapper.map(this.testProduct);
