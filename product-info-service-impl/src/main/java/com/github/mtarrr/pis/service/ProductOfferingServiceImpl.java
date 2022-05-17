@@ -22,35 +22,35 @@ public class ProductOfferingServiceImpl implements ProductOfferingService {
 
     @Override
     public ProductOfferingEntity createProductOffering(ProductOfferingEntity productOffering) throws Exception {
-        log.info("Creating entity");
+        log.debug("Creating entity");
         ProductOfferingEntity createdEntity = repository.insert(productOffering);
         elasticService.saveToElastic(createdEntity);
         notificationService.send(createdEntity);
-        log.info("Entity {} created", createdEntity.getBody().getName());
+        log.debug("Entity {} created", createdEntity.getBody().getName());
         return createdEntity;
     }
 
     @Override
     public ProductOfferingEntity patchProductOffering(String id, ProductOfferingEntity patchProductOffering) throws Exception {
-        log.info("Patching entity");
+        log.debug("Patching entity");
         ProductOfferingEntity storedEntity = getProductOfferingById(id);
         PatchUtils.patchProductOfferingEntity(storedEntity, patchProductOffering);
         ProductOfferingEntity patchedEntity = repository.update(id, storedEntity);
         elasticService.saveToElastic(patchedEntity);
         notificationService.send(patchedEntity);
-        log.info("Entity {} got new fields", patchedEntity.getBody().getName());
+        log.debug("Entity {} got new fields", patchedEntity.getBody().getName());
         return patchedEntity;
     }
 
     @Override
     public List<ProductOfferingEntity> getAllProductOfferings() {
-        log.info("Getting all entities");
+        log.debug("Getting all entities");
         return repository.getAll();
     }
 
     @Override
-    public ProductOfferingEntity getProductOfferingById(String id) {
-        log.info("Getting entity with id {}", id);
+    public ProductOfferingEntity getProductOfferingById(String id)  {
+        log.debug("Getting entity with id {}", id);
         ProductOfferingEntity entity = null;
         try {
             entity = repository.get(id);
