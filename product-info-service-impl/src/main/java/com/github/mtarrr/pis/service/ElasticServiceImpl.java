@@ -1,9 +1,11 @@
 package com.github.mtarrr.pis.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.mtarrr.pis.api.service.ElasticService;
 import com.github.mtarrr.pis.mapper.ProductOfferingMapper;
 import com.github.mtarrr.pis.model.ProductOffering;
 import com.github.mtarrr.pis.model.entity.ProductOfferingEntity;
+import lombok.Data;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -16,7 +18,8 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 @Service
-public class ElasticService {
+@Data
+public class ElasticServiceImpl implements ElasticService {
     @Autowired
     private final RestHighLevelClient client;
 
@@ -25,13 +28,7 @@ public class ElasticService {
     private final ProductOfferingMapper productOfferingMapper = ProductOfferingMapper.INSTANCE;
 
     private static final String INDEX_NAME = "product";
-    private static final String INDEX_TYPE = "doc";
-
-    @Autowired
-    public ElasticService(RestHighLevelClient client, ObjectMapper objectMapper) {
-        this.client = client;
-        this.objectMapper = objectMapper;
-    }
+    private static final String INDEX_TYPE = "_doc";
 
     public void saveToElastic(ProductOfferingEntity entity) throws Exception {
         ProductOffering productOffering = productOfferingMapper.map(entity);
@@ -48,6 +45,7 @@ public class ElasticService {
     public void deleteById(String id) throws Exception {
 
         DeleteRequest deleteRequest = new DeleteRequest(INDEX_NAME, INDEX_TYPE, id);
+        //log trace отладочная информация
         DeleteResponse response =
                 client.delete(deleteRequest, RequestOptions.DEFAULT);
 

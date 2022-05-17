@@ -1,4 +1,4 @@
-package com.github.mtarrr.pis;
+package com.github.mtarrr.pis.configuration;
 
 
 import org.apache.http.HttpHost;
@@ -14,8 +14,6 @@ public class ElasticSearchConfiguration {
     private String host;
     @Value("${elasticsearch.port}")
     private int port;
-    @Value("${elasticsearch.protocol}")
-    private String protocol;
 
     @Bean
     public RestHighLevelClient elasticsearchClient() {
