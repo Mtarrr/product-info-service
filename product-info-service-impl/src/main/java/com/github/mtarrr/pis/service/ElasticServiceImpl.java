@@ -15,6 +15,7 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Map;
 
 @Service
@@ -30,7 +31,7 @@ public class ElasticServiceImpl implements ElasticService {
     private static final String INDEX_NAME = "product";
     private static final String INDEX_TYPE = "_doc";
 
-    public void saveToElastic(ProductOfferingEntity entity) throws Exception {
+    public void saveToElastic(ProductOfferingEntity entity) throws IOException {
         ProductOffering productOffering = productOfferingMapper.map(entity);
 
         Map<String, Object> mapper = objectMapper.convertValue(productOffering, Map.class);
@@ -42,12 +43,10 @@ public class ElasticServiceImpl implements ElasticService {
 
     }
 
-    public void deleteById(String id) throws Exception {
+    public void deleteById(String id) throws IOException {
 
         DeleteRequest deleteRequest = new DeleteRequest(INDEX_NAME, INDEX_TYPE, id);
-        //log trace отладочная информация
-        DeleteResponse response =
-                client.delete(deleteRequest, RequestOptions.DEFAULT);
+        DeleteResponse response = client.delete(deleteRequest, RequestOptions.DEFAULT);
 
     }
 

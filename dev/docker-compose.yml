@@ -16,6 +16,7 @@ services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.13.4
     container_name: elastic
+    restart: always
     environment:
       - xpack.security.enabled=false
       - discovery.type=single-node
@@ -48,6 +49,7 @@ services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.0
     container_name: zookeeper
+    restart: always
     hostname: zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -56,6 +58,7 @@ services:
   kafka:
     image: confluentinc/cp-kafka:7.0.0
     container_name: broker
+    restart: always
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'

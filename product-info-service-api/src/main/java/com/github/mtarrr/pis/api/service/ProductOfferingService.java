@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface ProductOfferingService {
 
-    ProductOfferingEntity createProductOffering(ProductOfferingEntity productOffering) throws Exception;
+    ProductOfferingEntity createProductOffering(ProductOfferingEntity productOffering);
 
-    ProductOfferingEntity patchProductOffering(String id, ProductOfferingEntity productOffering) throws Exception;
+    ProductOfferingEntity patchProductOffering(String id, ProductOfferingEntity productOffering);
 
-    List<ProductOfferingEntity> getAllProductOfferings() throws Exception;
+    List<ProductOfferingEntity> getAllProductOfferings();
 
-    ProductOfferingEntity getProductOfferingById(String id) throws Exception;
+    ProductOfferingEntity getProductOfferingById(String id);
 
-    void deleteProductOffering(String id) throws Exception;
+    void deleteProductOffering(String id);
 }
