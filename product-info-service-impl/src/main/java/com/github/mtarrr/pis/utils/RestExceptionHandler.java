@@ -15,41 +15,41 @@ import javax.persistence.EntityNotFoundException;
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({MyEntityNotFoundException.class, EntityNotFoundException.class})
-    protected ResponseEntity<Object> handleEntityNotFoundEx(RuntimeException ex) {
-        ApiError apiError = new ApiError("Entity not found exception", ex.getMessage());
-        return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(ElasticServiceException.class)
-    protected ResponseEntity<Object> handleElasticServiceEx(RuntimeException ex) {
-        ApiError apiError = new ApiError("Elastic service problem", ex.getMessage());
-        return new ResponseEntity<>(apiError, HttpStatus.SERVICE_UNAVAILABLE);
-    }
-
-    @ExceptionHandler(NotificationServiceException.class)
-    protected ResponseEntity<Object> handleNotificationServiceEx(RuntimeException ex) {
-        ApiError apiError = new ApiError("Notification service problem", ex.getMessage());
-        return new ResponseEntity<>(apiError, HttpStatus.SERVICE_UNAVAILABLE);
+    @ExceptionHandler(Exception.class)
+    protected ResponseEntity<Object> handleAllExceptions() {
+        return new ResponseEntity<>(new ApiError(ErrorCode.UNEXPECTED_ERROR.getMessage(), ErrorCode.UNEXPECTED_ERROR.getCode()),
+                HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
     protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers,
                                                                    HttpStatus status, WebRequest request) {
-        return new ResponseEntity<>(new ApiError("No Handler Found", ex.getMessage()), status);
+        return new ResponseEntity<>(new ApiError(ex.getMessage(), ErrorCode.NO_HANDLER_FOUND.getCode()), status);
     }
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
-                                                                  HttpHeaders headers, HttpStatus status, WebRequest request) {
-        ApiError apiError = new ApiError("Malformed JSON Request", ex.getMessage());
-        return new ResponseEntity<>(apiError, status);
+                                                                  HttpHeaders headers, HttpStatus status,
+                                                                  WebRequest request) {
+        return new ResponseEntity<>(new ApiError(ErrorCode.MALFORMED_JSON_REQUEST.getMessage(), ErrorCode.MALFORMED_JSON_REQUEST.getCode()), status);
     }
 
-    @ExceptionHandler(Exception.class)
-    protected ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
-        ApiError apiError = new ApiError("Unexpected error", ex.getMessage());
-        return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
+    @ExceptionHandler(ElasticServiceException.class)
+    protected ResponseEntity<Object> handleElasticServiceEx() {
+        return new ResponseEntity<>(new ApiError(ErrorCode.ELASTIC_SERVICE_ERROR.getMessage(), ErrorCode.ELASTIC_SERVICE_ERROR.getCode()),
+                HttpStatus.SERVICE_UNAVAILABLE);
     }
+
+    @ExceptionHandler(NotificationServiceException.class)
+    protected ResponseEntity<Object> handleNotificationServiceEx() {
+        return new ResponseEntity<>(new ApiError(ErrorCode.NOTIFICATION_SERVICE_ERROR.getMessage(), ErrorCode.NOTIFICATION_SERVICE_ERROR.getCode()),
+                HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
+    @ExceptionHandler({MyEntityNotFoundException.class, EntityNotFoundException.class})
+    protected ResponseEntity<Object> handleEntityNotFoundEx(MyEntityNotFoundException e) {
+        return new ResponseEntity<>(new ApiError(ErrorCode.ENTITY_NOT_FOUND.getMessage() + e.getMessage(), ErrorCode.ENTITY_NOT_FOUND.getCode()), HttpStatus.NOT_FOUND);
+    }
+
 
 }

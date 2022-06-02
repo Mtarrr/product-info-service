@@ -36,7 +36,7 @@ public class ProductOfferingController {
             entity = productOfferingService.patchProductOffering(id, productOfferingMapper.map(productOffering));
         } catch (NullPointerException e) {
             log.debug("Unable to update entity with id " + id);
-            throw new MyEntityNotFoundException(e.toString(), id);
+            throw new MyEntityNotFoundException(id);
         }
         return ResponseEntity.status(HttpStatus.OK).body(productOfferingMapper.map(entity));
     }
@@ -55,7 +55,7 @@ public class ProductOfferingController {
             productOffering = productOfferingMapper.map(productOfferingService.getProductOfferingById(id));
         } catch (NullPointerException e) {
             log.debug("Impossible to get entity with id " + id);
-            throw new MyEntityNotFoundException(e.toString(), id);
+            throw new MyEntityNotFoundException(id);
         }
         return ResponseEntity.status(HttpStatus.FOUND).body(productOffering);
     }
@@ -66,7 +66,7 @@ public class ProductOfferingController {
             productOfferingService.deleteProductOffering(id);
         } catch (NullPointerException e) {
             log.debug("Unable to delete entity with id " + id);
-            throw new MyEntityNotFoundException(e.toString(), id);
+            throw new MyEntityNotFoundException(id);
         }
         return ResponseEntity.status(HttpStatus.OK).build();
     }

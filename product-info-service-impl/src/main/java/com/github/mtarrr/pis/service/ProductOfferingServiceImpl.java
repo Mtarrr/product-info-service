@@ -7,6 +7,7 @@ import com.github.mtarrr.pis.api.service.ProductOfferingService;
 import com.github.mtarrr.pis.model.entity.ProductOfferingEntity;
 import com.github.mtarrr.pis.repository.ProductOfferingRepository;
 import com.github.mtarrr.pis.utils.ElasticServiceException;
+import com.github.mtarrr.pis.utils.NotificationServiceException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -48,13 +49,13 @@ public class ProductOfferingServiceImpl implements ProductOfferingService {
             elasticService.saveToElastic(patchedEntity);
         } catch (IOException e) {
             log.debug("IOException in saveToElastic method");
-            throw new ElasticServiceException(e.toString(), "Save to Elastic problem");
+            throw new ElasticServiceException(e.getMessage());
         }
         try {
             notificationService.send(patchedEntity);
         } catch (JsonProcessingException e) {
             log.debug("JsonProcessingException in send method");
-            throw new ElasticServiceException(e.toString(), "Send method problem");
+            throw new NotificationServiceException(e.getMessage());
         }
     }
 
@@ -77,7 +78,7 @@ public class ProductOfferingServiceImpl implements ProductOfferingService {
             elasticService.deleteById(id);
             log.info("Entity with id {} deleted", id);
         } catch (IOException e) {
-            throw new ElasticServiceException(e.toString(), "Delete from Elastic problem");
+            throw new ElasticServiceException(e.getMessage());
         }
 
     }
