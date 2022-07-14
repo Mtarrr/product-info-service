@@ -1,11 +1,3 @@
 # Product Info Service
-
-###1. Use cases
-This service can be used to work with various products.
-
-###2. How to build
-
-###3. How to run
-
-###4. Basic endpoints
-
+This application is a backend part of the online store that can be used to work with various products.
+It has basic CRUD operations on entities in a PostgreSQL database, indexing in ElasticSearch, sending messages through Apache Kafka, and error handling.
